@@ -15,7 +15,7 @@ bash 'splunk_conf' do
     ./splunk start --accept-license
     ./splunk enable boot-start
     ./splunk add forward-server ulspla01.ccci.org:9997 -auth admin:changeme
-    ./splunk add monitor /opt/wildfly/standalone/log/server.log
+    ./splunk add monitor  /opt/wildfly-8.1.0.Final/standalone/log/server.log
     ./splunk restart
     EOH
   end
