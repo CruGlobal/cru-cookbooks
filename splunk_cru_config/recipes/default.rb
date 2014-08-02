@@ -2,11 +2,10 @@
 # Cookbook Name:: splunk_cru_config
 # Recipe:: default
 #
-# Copyright 2014, cru
-#
-# All rights reserved - Do Not Redistribute
+
 #
 
+#
 #configure splunk
 bash 'splunk_conf' do
   if !File.exists?("#{node['splunk']['install_path']}/etc/apps/search/local/inputs.conf")
@@ -14,8 +13,9 @@ bash 'splunk_conf' do
     cd "#{node['splunk']['install_path']}/bin"
     ./splunk start --accept-license
     ./splunk enable boot-start
-    ./splunk add forward-server ulspla01.ccci.org:9997 -auth admin:changeme
-    ./splunk add monitor  /opt/wildfly-8.1.0.Final/standalone/log/server.log
+    ./splunk add forward-server #{node['splunk']['forward_server']}:#{node['splunk']['receiver_port']} -auth #{node['splunk']['auth']}:#{node['splunk']['pass']}
+    ./splunk add monitor #{node['splunk']['monitor_path']}
+    ./splunk edit user #{node['splunk']['auth']} -password #{node['splunk']['newpass']} -auth #{node['splunk']['auth']}:#{node['splunk']['pass']}
     ./splunk restart
     EOH
   end
