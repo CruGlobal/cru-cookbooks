@@ -19,7 +19,7 @@ bash 'splunk_conf' do
     ./splunk enable boot-start
     ./splunk add forward-server #{fw_server}:9997 -auth #{auth_user}:#{default_pass}
     ./splunk add monitor #{add_monitor}
-    ./splunk edit user #{auth_user} -password #{new_pass} -auth #{auth_user}:#{new_pass})
+    ./splunk edit user #{auth_user} -password #{new_pass} -auth #{auth_user}:#{default_pass}
     ./splunk restart
     EOH
     end
