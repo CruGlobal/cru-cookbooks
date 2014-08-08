@@ -1,8 +1,6 @@
 include_recipe 'deploy'
 
 node[:deploy].each do |application, deploy|
-  next if node[:current_app] && node[:current_app] != application
-
   opsworks_deploy_dir do
     user deploy[:user]
     group deploy[:group]
