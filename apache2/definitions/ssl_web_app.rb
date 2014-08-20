@@ -5,6 +5,7 @@ define :ssl_web_app do
 
   if deploy['domains']
     template "#{node['apache']['dir']}/ssl/#{deploy['domains'].first}.crt" do
+      cookbook 'apache2'
       mode '0600'
       source "ssl.key.erb"
       variables :key => deploy['ssl_certificate']
@@ -15,6 +16,7 @@ define :ssl_web_app do
     end
 
     template "#{node['apache']['dir']}/ssl/#{deploy['domains'].first}.key" do
+      cookbook 'apache2'
       mode '0600'
       source "ssl.key.erb"
       variables :key => deploy['ssl_certificate_key']
@@ -25,6 +27,7 @@ define :ssl_web_app do
     end
 
     template "#{node['apache']['dir']}/ssl/#{deploy['domains'].first}.ca" do
+      cookbook 'apache2'
       mode '0600'
       source "ssl.key.erb"
       variables :key => deploy['ssl_certificate_ca']
