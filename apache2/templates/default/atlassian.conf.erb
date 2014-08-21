@@ -32,8 +32,8 @@ LoadModule proxy_http_module /usr/lib/apache2/modules/mod_proxy_http.so
       Allow from all
     </Proxy>
 
-    ProxyPass / http://127.0.0.1:8080/
-    ProxyPassReverse / http://127.0.0.1:8080/
+    ProxyPass / http://127.0.0.1:<%= node[:deploy][@application_name][:port] %>/
+    ProxyPassReverse / http://127.0.0.1:<%= node[:deploy][@application_name][:port] %>/
     <Location />
       Order allow,deny
       Allow from all
