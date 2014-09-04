@@ -27,6 +27,7 @@ LoadModule proxy_http_module /usr/lib/apache2/modules/mod_proxy_http.so
     SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
 
     ProxyRequests Off
+    ProxyPreserveHost On
     <Proxy *>
       Order deny,allow
       Allow from all
