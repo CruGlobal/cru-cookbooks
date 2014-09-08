@@ -1,6 +1,6 @@
 node[:deploy].each do |application, deploy|
   template "/etc/init.d/" + application do
-    source atlassian_service.erb
+    source 'atlassian_service.erb'
     owner 'root'
     group 'root'
     mode 0755
