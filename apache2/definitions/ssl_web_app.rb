@@ -59,7 +59,7 @@ define :ssl_web_app do
       server_aliases deploy['domains'][1, deploy['domains'].size] unless deploy['domains'][1, deploy['domains'].size].empty?
       mounted_at deploy['mounted_at']
       ssl_certificate_ca deploy['ssl_certificate_ca']
-      cookbook 'apache2'
+      cookbook deploy['cookbook']
       template deploy['template'] if deploy['template']
       deploy deploy
     end
