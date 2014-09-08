@@ -11,6 +11,7 @@ node[:deploy].each do |application, deploy|
   end
 
   service application do
-    action :enable, :start
+    action :enable
+    action :start
   end
 end
