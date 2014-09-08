@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# <%= @application %> Linux service controller script
+cd "<%= @deploy[:deploy_to] %>/bin"
+
+case "$1" in
+  start)
+    ./start-<%= @application %>.sh
+    ;;
+  stop)
+    ./stop-<%= @application %>.sh
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+    exit 1
+    ;;
+esac
