@@ -10,14 +10,6 @@ LoadModule proxy_http_module /usr/lib/apache2/modules/mod_proxy_http.so
   Redirect permanent / https://<%= @params[:server_name] %>
 </VirtualHost>
 
-<% if @params[:server_aliases] && !@params[:server_aliases].empty? -%>
-  <VirtualHost *:443>
-    ServerName <%= @params[:server_aliases].first %>
-    ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
-    Redirect permanent / https://<%= @params[:server_name] %>
-  </VirtualHost>
-<% end -%>
-
 <% if node[:deploy][@application_name][:ssl_support] -%>
   <VirtualHost *:443>
     ServerName <%= @params[:server_name] %>
