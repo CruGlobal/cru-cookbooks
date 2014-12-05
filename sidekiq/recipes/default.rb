@@ -17,7 +17,13 @@ node[:deploy].each do |application, deploy|
     end
   end
 
+  execute "ensure-sidekiq-is-setup-with-monit" do
+    command %Q{
+      monit reload
+    }
+  end
+
   execute "restart-sidekiq" do
-    command "monit reload && monit -g sidekiq_#{application} restart all"
+    command "sleep 5 && monit -g sidekiq_#{application} restart all"
   end
 end
