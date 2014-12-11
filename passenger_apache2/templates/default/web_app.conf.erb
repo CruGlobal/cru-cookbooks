@@ -27,6 +27,7 @@ PassengerPreStart http://<%= @params[:server_name] %>/
 
   PassengerRollingRestarts on
   PassengerResistDeploymentErrors on
+  PassengerMaxRequestTime 600
 
   <Directory <%= @params[:docroot] %>>
     Options FollowSymLinks

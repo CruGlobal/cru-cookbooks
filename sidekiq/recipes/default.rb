@@ -24,8 +24,6 @@ node[:deploy].each do |application, deploy|
   end
 
   execute "restart-sidekiq" do
-    command %Q{
-      echo "sleep 20 && monit -g sidekiq_#{application} restart all" | at now
-    }
+    command "sleep 2 && monit -g sidekiq_#{application} restart all"
   end
 end

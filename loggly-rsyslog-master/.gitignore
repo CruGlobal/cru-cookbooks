@@ -1,0 +1,26 @@
+.vagrant
+Berksfile.lock
+*~
+*#
+.#*
+\#*#
+.*.sw[a-z]
+*.un~
+/cookbooks
+
+# Bundler
+Gemfile.lock
+bin/*
+.bundle/*
+gems
+
+.coverage
+Vagrantfile
+
+TODO.md
+
+data_bags
+encrypted_data_bag_secret
+
+.kitchen
+.kitchen.local.yml
