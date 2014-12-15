@@ -21,6 +21,7 @@
     <entry key="mailServer"><%= node['crs-api']['mail-server-hostname']%></entry>
     <entry key="mailServerUsername"><%= node['crs-api']['mail-server-username']%></entry>
     <entry key="mailServerPassword"><%= node['crs-api']['mail-server-password']%></entry>
+    <entry key="mailAsynchronousRetryEnabled"><%= ENV['ERT_ASYNC_ENABLED']%></entry>
 
     <!-- authorize.net test account info -->
     <entry key="authnetTestId"><%= node['crs-api']['authnet-test-id']%></entry>
