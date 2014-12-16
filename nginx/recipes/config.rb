@@ -28,7 +28,6 @@ template "#{node[:nginx][:dir]}/sites-available/crs_web_test" do
   owner "root"
   group "root"
   mode 0644
-notifies :restart, "service[nginx]", :immediately
 end
 
 ruby_block "insert_line" do
