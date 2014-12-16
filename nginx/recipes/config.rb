@@ -24,11 +24,23 @@ package "nginx"
 include_recipe "nginx::service"
 
 template "#{node[:nginx][:dir]}/sites-available/crs_web_test" do
-  source "site.erb"
+  source "site_test.erb"
   owner "root"
   group "root"
   mode 0644
 notifies :restart, "service[nginx]", :immediately
 end
+
+ruby_block "insert_line" do
+  block do
+    file = Chef::Util::FileEdit.new("#{node[:nginx][:dir]}/sites-available/crs_web_test")
+    file.insert_line_after_match(/index.php;/g, })
+    file.insert_line_after_match(/index.php;/g, add_header Cache-Control "no-cache, no-store, must-revalidate";)
+    file.insert_line_after_match(/index.php;/g, if ($request_uri = "/") { )
+    file.insert_line_after_match(/index.php;/g, #add headers if index.html )
+    file.write_file
+  end
+end
+
 
 
