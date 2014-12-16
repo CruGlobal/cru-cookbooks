@@ -29,7 +29,7 @@ template "#{node[:nginx][:dir]}/sites-available/crs_web_test" do
   group "root"
   mode 0644
 notifies :restart, "service[nginx]", :immediately
-only_if !File.exist?("#{node[:nginx][:dir]}/sites-available/crs_web_test") }
+only_if !File.exist?("#{node[:nginx][:dir]}/sites-available/crs_web_test")
 end
 
 
