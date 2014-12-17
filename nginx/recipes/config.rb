@@ -18,28 +18,40 @@
 # limitations under the License.
 #
 
-package "nginx"
-
-
 include_recipe "nginx::service"
 
-template "#{node[:nginx][:dir]}/sites-available/crs_web_test" do
-  source "site_test.erb"
-  owner "root"
-  group "root"
-  mode 0644
+line1 = '#add headers if index.html'
+line2 = 'if ($request_uri = "/") {'
+line3 = 'add_header Cache-Control "no-cache, no-store, must-revalidate";'
+line4 = '}'
+
+
+ruby_block "insert_line" do
+  block do
+    file = Chef::Util::FileEdit.new("/etc/nginx/sites-available/crs_web")
+    file.insert_line_after_match("index.php", " #{line4}")
+    file.insert_line_after_match("index.php", " #{line3}")
+    file.insert_line_after_match("index.php", " #{line2}")
+    file.insert_line_after_match("index.php", " #{line1}")
+    file.insert_line_after_match("index.php", " ")
+    file.write_file
+  end
+notifies :restart, "service[nginx]", :immediately
+not_if "grep -q #{line1} /etc/nginx/sites-available/crs_web"
 end
 
 ruby_block "insert_line" do
   block do
-    file = Chef::Util::FileEdit.new("#{node[:nginx][:dir]}/sites-available/crs_web_test")
-    file.insert_line_after_match(/index.php;/g, })
-    file.insert_line_after_match(/index.php;/g, add_header Cache-Control "no-cache, no-store, must-revalidate";)
-    file.insert_line_after_match(/index.php;/g, if ($request_uri = "/") { )
-    file.insert_line_after_match(/index.php;/g, #add headers if index.html )
+    file = Chef::Util::FileEdit.new("/etc/nginx/sites-available/eventhub")
+    file.insert_line_after_match("index.php", " #{line4}")
+    file.insert_line_after_match("index.php", " #{line3}")
+    file.insert_line_after_match("index.php", " #{line2}")
+    file.insert_line_after_match("index.php", " #{line1}")
+    file.insert_line_after_match("index.php", " ")
     file.write_file
   end
+notifies :restart, "service[nginx]", :immediately
+not_if "grep -q #{line1} /etc/nginx/sites-available/eventhub"
 end
-
 
 
