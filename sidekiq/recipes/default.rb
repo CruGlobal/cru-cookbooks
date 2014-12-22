@@ -1,7 +1,7 @@
 include_recipe "deploy"
 
 node[:deploy].each do |application, deploy|
-  next if node[:current_app] && node[:current_app] != application
+  next unless node[:application] && node[:application] == application
   
   template "#{node[:monit][:conf_dir]}/sidekiq_#{application}.monitrc" do
     cookbook 'sidekiq'
