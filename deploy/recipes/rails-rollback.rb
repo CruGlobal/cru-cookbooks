@@ -1,5 +1,5 @@
 node[:deploy].each do |application, deploy|
-  next if node[:current_app] && node[:current_app] != application
+  next unless deploy[:application] && deploy[:application] == application
 
   if deploy[:application_type] != 'rails'
     Chef::Log.debug("Skipping deploy::rails-rollback application #{application} as it is not a Rails app")

@@ -1,7 +1,7 @@
 include_recipe "deploy"
 
 node[:deploy].each do |application, deploy|
-  next if node[:current_app] && node[:current_app] != application
+  next unless deploy[:application] && deploy[:application] == application
 
   execute "restart Rails app #{application}" do
     cwd deploy[:current_path]
