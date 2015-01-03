@@ -3,6 +3,8 @@ include_recipe "deploy"
 node[:deploy].each do |application, deploy|
   next unless deploy[:application] && deploy[:application] == application
   
+  template_existed = File.exist?("#{node[:monit][:conf_dir]}/sidekiq_#{application}.monitrc")
+  
   template "#{node[:monit][:conf_dir]}/sidekiq_#{application}.monitrc" do
     cookbook 'sidekiq'
     owner 'root'
@@ -27,5 +29,6 @@ node[:deploy].each do |application, deploy|
 
   execute "restart-sidekiq" do
     command "sleep 2 && monit -g sidekiq_#{application} restart all"
+    only_if template_existed
   end
 end
