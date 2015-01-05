@@ -1,0 +1,6 @@
+<% (['development', 'staging', 'production'] + [@environment]).uniq.each do |env| -%>:
+<%= env %>
+  api_key: <%= @facebook['api_key'] %>
+  secret_key: <%= @facebook['secret'] %>
+<% end %>
+

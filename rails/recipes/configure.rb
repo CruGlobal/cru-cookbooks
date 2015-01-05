@@ -58,6 +58,19 @@ node[:deploy].each do |application, deploy|
     end
   end
 
+  template "#{deploy[:deploy_to]}/shared/config/facebook.yml" do
+    source "facebook.yml.erb"
+    cookbook 'rails'
+    mode "0660"
+    group deploy[:group]
+    owner deploy[:user]
+    variables(:facebook => deploy[:facebook], :environment => deploy[:rails_env])
+
+    only_if do
+      deploy[:facebook]
+    end
+  end
+
   template "#{deploy[:deploy_to]}/shared/config/database.yml" do
     source "database.yml.erb"
     cookbook 'rails'
