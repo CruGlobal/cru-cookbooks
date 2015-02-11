@@ -124,7 +124,7 @@ frontend http-in
       <% end -%>
 
       <% redirect_domans.each do |redirect_domain| -%>
-        redirect location <%= redirect_domaindomain %> if static_application_<%= app_name %>_domain_<%= redirect_domain.gsub(/[^\w.:-]/, '_') %>
+        redirect location <%= redirect_domain %> if static_application_<%= app_name %>_domain_<%= redirect_domain.gsub(/[^\w.:-]/, '_') %>
       <% end -%>
     <% end -%>
   <% end -%>
