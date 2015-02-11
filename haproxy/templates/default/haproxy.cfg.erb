@@ -108,7 +108,8 @@ frontend http-in
   <% unless node[:haproxy][:static_applications].empty? || node[:haproxy][:static_backends].empty? -%>
     <% node[:haproxy][:static_applications].each do |app_name, app_config| -%>
       <% if app_config['redirect'] == "true" %>
-        <% main_domains = domain = app_config['domains'].first -%>
+        <% main_domains = [app_config['domains'].first] -%>
+        <% domain = app_config['domains'].first -%>
         <% redirect_domans = app_config['domains'][1, app_config['domains'].size] unless app_config['domains'][1, app_config['domains'].size].empty? -%>
       <% else -%>
         <% main_domains = app_config['domains'] -%>
