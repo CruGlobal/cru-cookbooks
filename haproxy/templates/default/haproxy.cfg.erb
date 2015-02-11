@@ -107,12 +107,24 @@ frontend http-in
   # choose backend
   <% unless node[:haproxy][:static_applications].empty? || node[:haproxy][:static_backends].empty? -%>
     <% node[:haproxy][:static_applications].each do |app_name, app_config| -%>
-      <% app_config['domains'].each do |domain| -%>
+      <% if app_config['redirect'] == "true" %>
+        <% main_domains = domain = app_config['domains'].first -%>
+        <% redirect_domans = app_config['domains'][1, app_config['domains'].size] unless app_config['domains'][1, app_config['domains'].size].empty? -%>
+      <% else -%>
+        <% main_domains = app_config['domains'] -%>
+        <% redirect_domans = [] -%>
+      <% end -%>
+
+      <% main_domains.each do |main_domain| -%>
         <% if app_config['mounted_at'] -%>
-  use_backend static_servers if static_application_<%= app_name %>_domain_<%= domain.gsub(/[^\w.:-]/, '_') %> static_application_<%= app_name %>_domain_<%= domain %>_path
+  use_backend static_servers if static_application_<%= app_name %>_domain_<%= main_domain.gsub(/[^\w.:-]/, '_') %> static_application_<%= app_name %>_domain_<%= domain %>_path
         <% else -%>
-  use_backend static_servers if static_application_<%= app_name %>_domain_<%= domain.gsub(/[^\w.:-]/, '_') %>
+  use_backend static_servers if static_application_<%= app_name %>_domain_<%= main_domain.gsub(/[^\w.:-]/, '_') %>
         <% end -%>
+      <% end -%>
+
+      <% redirect_domans.each do |redirect_domain| -%>
+        redirect location <%= redirect_domaindomain %> if static_application_<%= app_name %>_domain_<%= redirect_domain.gsub(/[^\w.:-]/, '_') %>
       <% end -%>
     <% end -%>
   <% end -%>
