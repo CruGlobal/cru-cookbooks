@@ -1,0 +1,40 @@
+LoadModule proxy_module /usr/lib/apache2/modules/mod_proxy.so
+LoadModule proxy_http_module /usr/lib/apache2/modules/mod_proxy_http.so
+
+<VirtualHost *:80>
+  ServerName <%= @params[:server_name] %>
+  <% if @params[:server_aliases] && !@params[:server_aliases].empty? -%>
+  ServerAlias <% @params[:server_aliases].each do |a| %><%= "#{a}" %> <% end %>
+  <% end -%>
+
+  Redirect permanent / https://<%= @params[:server_name] %>/
+</VirtualHost>
+
+<% if node[:deploy][@application_name][:ssl_support] -%>
+  <VirtualHost *:443>
+    ServerName <%= @params[:server_name] %>
+
+    SSLEngine on
+    SSLProxyEngine on
+    SSLCertificateFile <%= node[:apache][:dir] %>/ssl/<%= @params[:server_name] %>.crt
+    SSLCertificateKeyFile <%= node[:apache][:dir] %>/ssl/<%= @params[:server_name] %>.key
+    <% if @params[:ssl_certificate_ca] -%>
+      SSLCACertificateFile <%= node[:apache][:dir] %>/ssl/<%= @params[:server_name] %>.ca
+    <% end -%>
+    SetEnvIf User-Agent ".*MSIE.*" nokeepalive ssl-unclean-shutdown downgrade-1.0 force-response-1.0
+
+    ProxyRequests Off
+    ProxyPreserveHost On
+    <Proxy *>
+      Order deny,allow
+      Allow from all
+    </Proxy>
+
+    ProxyPass / http://127.0.0.1:<%= node[:deploy][@application_name][:port] %>/
+    ProxyPassReverse / http://127.0.0.1:<%= node[:deploy][@application_name][:port] %>/
+    <Location />
+      Order allow,deny
+      Allow from all
+    </Location>
+  </VirtualHost>
+<% end -%>
