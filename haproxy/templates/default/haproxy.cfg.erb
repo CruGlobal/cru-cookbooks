@@ -182,7 +182,7 @@ frontend https-in
       <% end -%>
 
       <% redirect_domans.each do |redirect_domain| -%>
-        redirect location <%= main_domains.first %> if static_application_<%= app_name %>_domain_<%= redirect_domain.gsub(/[^\w.:-]/, '_') %>
+        redirect location <%= main_domains.first %> if rails_application_<%= app_name %>_domain_<%= redirect_domain.gsub(/[^\w.:-]/, '_') %>
       <% end -%>
     <% end -%>
   <% end -%>
