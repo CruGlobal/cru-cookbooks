@@ -156,7 +156,7 @@ frontend https-in
   # all domains of Rails applications
   <% node[:haproxy][:rails_applications].each do |app_name, app_config| -%>
     <% app_config['domains'].each do |domain| -%>
-  acl rails_applications hdr_end(host) -i <%= domain %>
+      acl rails_application_<%= app_name %>_domain_<%= domain.gsub(/[^\w.:-]/, '_') %> hdr_end(host) -i <%= domain %>
     <% end -%>
   <% end -%>
 
