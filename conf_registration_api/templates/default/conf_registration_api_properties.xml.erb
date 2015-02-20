@@ -23,6 +23,7 @@
     <entry key="mailServerUsername"><%= node['crs-api']['mail-server-username']%></entry>
     <entry key="mailServerPassword"><%= node['crs-api']['mail-server-password']%></entry>
     <entry key="mailServerPort"><%= node['crs-api']['mail-server-port']%></entry>
+
     <!-- authorize.net test account info -->
     <entry key="authnetTestId"><%= node['crs-api']['authnet-test-id']%></entry>
     <entry key="authnetTestToken"><%= node['crs-api']['authnet-test-token']%></entry>
@@ -33,6 +34,16 @@
     <entry key="multipassDeviceId"><%= node['crs-api']['multipass-device-id']%></entry>
     <entry key="multipassTransactionKey"><%= node['crs-api']['multipass-transaction-key']%></entry>
     <entry key="multipassUrl"><%= node['crs-api']['multipass-url']%></entry>
+
+    <entry key="trustCommerceCustomerId"><%= node['crs-api']['trust-commerce-customer-id']%></entry>
+    <entry key="trustCommercePassword"><%= node['crs-api']['trust-commerce-password']%></entry>
+
+    <!-- CCP API info -->
+    <entry key="ccpApplicationId"><%= node['crs-api']['ccp-app-id']%></entry>
+    <entry key="ccpApplicationPassword"><%= node['crs-api']['ccp-app-password']%></entry>
+    <entry key="ccpUrl"><%= node['crs-api']['ccp-url']%></entry>
+    <entry key="ccpTxnEndpoint"><%= node['crs-api']['ccp-txn-end-point']%></entry>
+    <entry key="ccpClientEncryptionKeysEndpoint"><%= node['crs-api']['ccp-client-encryption-keys-end-point']%></entry>
 
     <entry key="currencyCode"><%= node['crs-api']['currency-code']%></entry>
 
@@ -46,9 +57,6 @@
     <entry key="apiServerProtocol"><%= node['crs-api']['api-server-protocol']%></entry>
     <entry key="apiServerPort"><%= node['crs-api']['api-server-port']%></entry>
     <entry key="apiServerName"><%= node['crs-api']['api-server-name']%></entry>
-
-    <entry key="trustCommerceCustomerId"><%= node['crs-api']['trust-commerce-customer-id']%></entry>
-    <entry key="trustCommercePassword"><%= node['crs-api']['trust-commerce-password']%></entry>
 
     <!-- Infobase URL -->
     <entry key="infobaseUrl"><%= node['crs-api']['infobase-url']%></entry>
