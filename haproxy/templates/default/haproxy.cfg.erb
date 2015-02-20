@@ -150,7 +150,11 @@ frontend http-in
   <% end -%>
 
 frontend https-in
-  bind :443 ssl crt /etc/haproxy/certs.d ciphers ECDHE-RSA-AES256-SHA:HIGH:!MD5:!aNULL:!EDH:!AESGCM no-sslv3
+  <% if node[:ssl_insecure] == "true" -%>
+    bind :443 ssl crt /etc/haproxy/certs.d ciphers ECDHE-RSA-AES256-SHA:RC4-SHA:RC4:HIGH:!MD5:!aNULL:!EDH:!AESGCM
+  <% else -%>
+    bind :443 ssl crt /etc/haproxy/certs.d ciphers ECDHE-RSA-AES256-SHA:HIGH:!MD5:!aNULL:!EDH:!AESGCM no-sslv3
+  <% end -%>
   reqadd X-Forwarded-Proto:\ https
 
   # all domains of Rails applications
