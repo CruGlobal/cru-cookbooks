@@ -121,13 +121,25 @@ if node['splunk']['ssl_forwarding'] == true
   end
 end
 
+#template "#{node['splunk']['forwarder_home']}/etc/system/local/outputs.conf" do
+#	source "forwarder/outputs.conf.erb"
+#	owner "root"
+#	group "root"
+#	mode "0644"
+#	variables :splunk_servers => splunk_servers
+#	notifies :restart, "service[splunk]"
+#end
+
 template "#{node['splunk']['forwarder_home']}/etc/system/local/outputs.conf" do
-	source "forwarder/outputs.conf.erb"
-	owner "root"
-	group "root"
-	mode "0644"
-	variables :splunk_servers => splunk_servers
-	notifies :restart, "service[splunk]"
+       source "forwarder/cru_outputs.conf.erb"
+       owner "root"
+       group "root"
+       mode "0644"
+       variables(
+       :default_group => node['splunk']['group'],
+       :splunk_servers => node['splunk']['forward_server']
+                )
+       notifies :restart, "service[splunk]"
 end
 
 ["limits"].each do |cfg|
