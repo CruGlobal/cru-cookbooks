@@ -3,7 +3,8 @@ defaultGroup = <%= @default_group %>
 disabled = false
 compressed = true
 
-[tcpout-server://<%= @splunk_servers %>:<%= node['splunk']['receiver_port']%>]
+[tcpout:<%= @default_group %>]
+server = <%= @splunk_servers %>:<%= node['splunk']['receiver_port']%>]
 forwardedindex.0.whitelist = .*
 forwardedindex.1.blacklist = _.*
 forwardedindex.2.whitelist = _audit
