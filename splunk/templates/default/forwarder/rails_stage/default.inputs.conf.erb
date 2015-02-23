@@ -4,7 +4,8 @@ host = <%= node['ec2'] ? node['ec2']['instance_id'] : node['fqdn'] %>-default
 [monitor://<%= node['splunk']['forwarder_home']%>/var/log/splunk]
 disabled = 0
 
-[monitor://<%=['splunk'][rails_monitor_path]%>]
+[monitor:///srv/www/.../shared/log/*.log]
 sourcetype= rails_stage_log
-recursive = false
+recursive = true
 disabled = 0
+

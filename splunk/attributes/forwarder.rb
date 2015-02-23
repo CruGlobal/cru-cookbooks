@@ -16,3 +16,7 @@ default['splunk']['ssl_forwarding']             = false
 default['splunk']['ssl_forwarding_cacert']      = "myCACertificate.pem"
 default['splunk']['ssl_forwarding_servercert']  = "myServerCertificate.pem"
 default['splunk']['ssl_forwarding_pass']        = "splunk"      # SSL Cert Password
+
+#cru attributes
+default['splunk']['forward_server']='nil'
+default['splunk']['group']='default'
