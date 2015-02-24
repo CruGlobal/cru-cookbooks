@@ -5,7 +5,7 @@ host = <%= node['hostname'] %>_prod_<%= node['ec2'] ? node['ec2']['instance_id']
 disabled = 1
 
 [monitor:///srv/www/.../shared/log/*.log]
-sourcetype= rails_prod_log
+sourcetype= ruby_on_rails
 recursive = true
 disabled = 0
 
