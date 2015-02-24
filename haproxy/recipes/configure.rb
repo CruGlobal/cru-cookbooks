@@ -13,7 +13,7 @@ app_names = []
 end
 app_names.each do |app_name|
   app = node['deploy'][app_name]
-  if app['ssl_support']
+  if app && app['ssl_support']
     app['domains'].each do |domain|
       template "/etc/haproxy/certs.d/#{domain}.pem" do
         cookbook "haproxy"
