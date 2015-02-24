@@ -1,5 +1,5 @@
 [default]
-host = <%= node['fqdn'] %>-<%= node['ec2'] ? node['ec2']['instance_id'] : node['fqdn'] %>
+host = <%= node['hostname'] %>_<%= node['ec2'] ? node['ec2']['instance_id'] : node['fqdn'] %>
 
 [monitor://<%= node['splunk']['forwarder_home']%>/var/log/splunk]
 disabled = 0
