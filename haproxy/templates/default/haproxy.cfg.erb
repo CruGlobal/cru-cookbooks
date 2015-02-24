@@ -107,7 +107,7 @@ frontend http-in
   # choose backend
   <% unless node[:haproxy][:rails_applications].empty? || node[:haproxy][:rails_backends].empty? -%>
     <% node[:haproxy][:rails_applications].each do |app_name, app_config| -%>
-      <% if node[:deploy][app_name]['redirect'] == "true" %>
+      <% if node[:deploy][app_name] && node[:deploy][app_name]['redirect'] == "true" %>
         <% main_domains = [app_config['domains'].first] -%>
         <% redirect_domains = app_config['domains'][1, app_config['domains'].size] unless app_config['domains'][1, app_config['domains'].size].empty? -%>
       <% else -%>
