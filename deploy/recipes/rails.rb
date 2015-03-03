@@ -1,4 +1,5 @@
 include_recipe 'deploy'
+include_recipe 'bundler::setup'
 
 node[:deploy].each do |application, deploy|
   next unless deploy[:application] && deploy[:application] == application
