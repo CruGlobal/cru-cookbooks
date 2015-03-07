@@ -1,7 +1,16 @@
 application = node['application']
 deploy = node['deploy']
+deploy_to = "/srv/www/#{application}/current/system"
 
-template "/srv/www/#{application}/current/system/maintenance.html" do
+directory deploy_to do
+  action :create
+  recursive true
+  mode "0775"
+  group deploy[:group]
+  owner deploy[:user]
+end
+
+template "#{deploy_to}/maintenance.html" do
   source "maintenance.html.erb"
   cookbook 'rails'
   mode "0660"
