@@ -13,7 +13,7 @@ end
 template "#{deploy_to}/maintenance.html" do
   source "maintenance.html.erb"
   cookbook 'rails'
-  mode "0660"
+  mode "0666"
   group deploy[:group]
   owner deploy[:user]
   variables(:reason => node[:reason], :deadline => node[:deadline])
