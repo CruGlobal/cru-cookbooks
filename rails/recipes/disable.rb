@@ -1,4 +1,5 @@
 application = node['application']
+deploy = node['deploy']
 
 template "/srv/www/#{application}/current/system/maintenance.html" do
   source "maintenance.html.erb"
