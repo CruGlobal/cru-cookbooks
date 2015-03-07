@@ -39,7 +39,7 @@
        <div style="text-align: center; width: 200px; margin: 0 auto;">
          <p style="color: red; font-size: 16px; line-height: 20px;">
            The system is down for <%= @reason ? @reason : "maintenance" %>
-           as of <%= Time.now.strftime("%H:%M %Z") %>.
+           as of <%= Time.now.localtime("-05:00").strftime("%l:%M %p ET") %>.
          </p>
          <p style="color: #666;">
            It'll be back <%= @deadline ? @deadline : "shortly" %>.
