@@ -1,3 +1,4 @@
+raise node['application'].inspect
 application = deploy[:application]
 
 template "/srv/www/#{application}/current/system/maintenance.html" do
