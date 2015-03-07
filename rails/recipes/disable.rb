@@ -1,5 +1,4 @@
-raise node['application'].inspect
-application = deploy[:application]
+application = node['application']
 
 template "/srv/www/#{application}/current/system/maintenance.html" do
   source "maintenance.html.erb"
