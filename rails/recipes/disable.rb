@@ -1,6 +1,6 @@
 application = node['application']
 deploy = node['deploy']
-deploy_to = "/srv/www/#{application}/current/system"
+deploy_to = "/srv/www/#{application}/current/public/system"
 
 directory deploy_to do
   action :create
