@@ -1,5 +1,5 @@
 application = node['application']
 
-file "/srv/www/#{application}/current/system/maintenance.html" do
+file "/srv/www/#{application}/current/public/system/maintenance.html" do
   action :delete
 end
