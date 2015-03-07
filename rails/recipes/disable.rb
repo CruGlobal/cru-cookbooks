@@ -6,6 +6,6 @@ template "/srv/www/#{application}/current/system/maintenance.html" do
   mode "0660"
   group deploy[:group]
   owner deploy[:user]
-  variables(:reason => deploy[:reason], :deadline => deploy[:deadline])
+  variables(:reason => node[:reason], :deadline => node[:deadline])
 end
 
