@@ -1,9 +1,6 @@
-include_recipe "deploy"
-
 application = deploy[:application]
-deploy = node[:deploy][application]
 
-template "#{deploy[:deploy_to]}/current/system/maintenance.html" do
+template "/srv/www/#{application}/current/system/maintenance.html" do
   source "maintenance.html.erb"
   cookbook 'rails'
   mode "0660"
