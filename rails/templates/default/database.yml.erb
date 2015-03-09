@@ -35,8 +35,8 @@ uscm:
 
 <% end %>
 
-<% if @crumpd %>
-crumpd:
+<% if @simpd %>
+simpd:
   adapter: <%= @uscm[:adapter].to_s.inspect %>
   database: <%= @uscm[:database].to_s.inspect %>
   encoding: <%= (@uscm[:encoding] || 'utf8').to_s.inspect %>
@@ -47,7 +47,7 @@ crumpd:
 
 <% else %>
 
-crumpd:
+simpd:
   adapter: <%= @database[:adapter].to_s.inspect %>
   database: <%= @database[:database].to_s.inspect %>
   encoding: <%= (@database[:encoding] || 'utf8').to_s.inspect %>
