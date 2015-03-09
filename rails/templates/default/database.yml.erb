@@ -37,13 +37,13 @@ uscm:
 
 <% if @simpd %>
 simpd:
-  adapter: <%= @uscm[:adapter].to_s.inspect %>
-  database: <%= @uscm[:database].to_s.inspect %>
-  encoding: <%= (@uscm[:encoding] || 'utf8').to_s.inspect %>
-  host: <%= (@uscm[:host] || 'localhost').to_s.inspect %>
-  username: <%= @uscm[:username].to_s.inspect %>
-  password: <%= @uscm[:password].to_s.inspect %>
-  reconnect: <%= @database[:reconnect].nil? ? 'true' : @database[:reconnect] %>
+  adapter: <%= @simpd[:adapter].to_s.inspect %>
+  database: <%= @simpd[:database].to_s.inspect %>
+  encoding: <%= (@simpd[:encoding] || 'utf8').to_s.inspect %>
+  host: <%= (@simpd[:host] || 'localhost').to_s.inspect %>
+  username: <%= @simpd[:username].to_s.inspect %>
+  password: <%= @simpd[:password].to_s.inspect %>
+  reconnect: <%= @simpd[:reconnect].nil? ? 'true' : @simpd[:reconnect] %>
 
 <% else %>
 
