@@ -1,0 +1,10 @@
+[default]
+host = <%= node['hostname'] %>_<%= node['ec2'] ? node['ec2']['instance_id'] : node['fqdn'] %>
+
+[monitor://<%= node['splunk']['forwarder_home']%>/var/log/splunk]
+disabled = 1
+
+[monitor:///home/cq/cq/.../crx-quickstart/logs/*.log]
+recursive = true
+disabled = 0
+
