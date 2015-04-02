@@ -44,7 +44,15 @@ PassengerPreStart http://<%= @params[:server_name] %>/
   <Directory ~ "\.git">
     Order allow,deny
     Deny from all
-  </Directory>
+    </Directory>
+
+  <LocationMatch "^/assets/.*-[0-9a-f]{32}.*$">
+    Header unset ETag
+    FileETag None
+    # RFC says only cache for 1 year
+    ExpiresActive On
+    ExpiresDefault "access plus 1 year"
+  </LocationMatch>
 
   LogLevel <%= node[:apache][:log_level] %>
   ErrorLog <%= node[:apache][:log_dir] %>/<%= @params[:name] %>-error.log
