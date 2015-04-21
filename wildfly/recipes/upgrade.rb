@@ -8,7 +8,7 @@ execute 'remove_wildfly' do
           command 'rm -rf /opt/wildfly*.tar.gz'
           creates '/tmp/something'
           action :run
-          not_if '{cd /opt/wildfly/bin/; ./standalone.sh --version | grep -q 'WildFly node['wildfly']['version']'}'
+          not_if { cd /opt/wildfly/bin/ ; ./standalone.sh --version | grep -q 'WildFly' + node['wildfly']['version'] }
         end
                 
 remote_file '/opt/wildfly-' + node['wildfly']['version'] + '.tar.gz' do
@@ -30,6 +30,7 @@ execute 'chown-wildfly' do
   cwd '/opt'
   command 'chown -R wildfly:wildfly /opt/wildfly-' + node['wildfly']['version']
   not_if { File.exists?('/opt/wildfly') }
+end
 
 execute 'rename-directory-remove-version' do
   command 'mv /opt/wildfly-' + node['wildfly']['version'] + ' /opt/wildfly'
