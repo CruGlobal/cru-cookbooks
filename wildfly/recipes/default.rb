@@ -29,5 +29,11 @@ execute 'rename-directory-remove-version' do
   not_if { File.exists?('/opt/wildfly')}
 end
 
+template "/opt/wildfly/bin/standalone.conf" do
+  backup false
+  source "standalone.conf.erb"
+  mode 0755
+end
+
 include_recipe 'wildfly::wildfly_service'
 include_recipe 'wildfly::add_deploy_user'
