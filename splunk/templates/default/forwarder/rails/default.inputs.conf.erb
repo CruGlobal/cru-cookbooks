@@ -1,0 +1,11 @@
+[default]
+host = <%= node['hostname'] %>-<%= node['ec2'] ? node['ec2']['instance_id'] : node['fqdn'] %>
+
+[monitor://<%= node['splunk']['forwarder_home']%>/var/log/splunk]
+disabled = 1
+
+[monitor:///srv/www/.../shared/log/*.log]
+sourcetype= ruby_on_rails
+recursive = true
+disabled = 0
+
