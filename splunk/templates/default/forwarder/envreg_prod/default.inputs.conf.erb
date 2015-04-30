@@ -5,7 +5,7 @@ host = <%= node['hostname'] %>_<%= node['ec2'] ? node['ec2']['instance_id'] : no
 disabled = 1
 
 [monitor:///opt/wildfly/standalone/log/*.log]
-sourcetype= wildfly_prod_log
+#sourcetype=
 recursive = true
 disabled = 0
 
