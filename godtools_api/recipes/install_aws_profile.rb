@@ -1,4 +1,4 @@
-directory '.aws' do
+directory '/home/wildfly/.aws' do
   owner 'wildfly'
   group 'wildfly'
    mode 0755
@@ -6,7 +6,7 @@ directory '.aws' do
 end
 
 
-template '.aws/credentials' do
+template '/home/wildfly/.aws/credentials' do
   owner 'wildfly'
   group 'wildfly'
   mode 0444
