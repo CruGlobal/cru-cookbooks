@@ -1,5 +1,6 @@
 user 'wildfly' do
-
+  home '/home/wildfly'
+  manage_home true
   :create
 end
 
