@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # <%= @application %> Linux service controller script
+export JAVA_HOME=<%= @deploy[:java_home] %>
 cd "<%= @deploy[:deploy_to] %>/bin"
 
 case "$1" in
