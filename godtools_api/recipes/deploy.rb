@@ -6,7 +6,8 @@ ruby_block 'deploy-from-jenkins' do
   @client = JenkinsApi::Client.new(:server_ip => node['godtools']['continuous_integration']['hostname'],
                                    :username => node['godtools']['continuous_integration']['username'],
                                    :password => node['godtools']['continuous_integration']['password'],
-                                   :ssl => true)
+                                   :ssl => true,
+                                   :server_port => 443)
 
   job_params = Hash.new()
   job_params['targetEnvironment'] = node['godtools']['continuous_integration']['target_environment']
