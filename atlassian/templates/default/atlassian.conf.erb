@@ -1,5 +1,6 @@
 LoadModule proxy_module /usr/lib/apache2/modules/mod_proxy.so
 LoadModule proxy_http_module /usr/lib/apache2/modules/mod_proxy_http.so
+LoadModule proxy_wstunnel_module /usr/lib/apache2/modules/mod_proxy_wstunnel.so
 
 <VirtualHost *:80>
   ServerName <%= @params[:server_name] %>
@@ -25,16 +26,30 @@ LoadModule proxy_http_module /usr/lib/apache2/modules/mod_proxy_http.so
 
     ProxyRequests Off
     ProxyPreserveHost On
+    
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !^/synchrony
+    RewriteRule ^/(.*) http://127.0.0.1:<%= node[:deploy][@application_name][:port] %>/$1 [P]
+    
     <Proxy *>
-      Order deny,allow
-      Allow from all
+      Require all granted
     </Proxy>
 
+    ProxyPass /synchrony http://127.0.0.1:8091/synchrony
+
+    <Location /synchrony>
+      Require all granted
+      RewriteEngine on
+      RewriteCond %{HTTP:UPGRADE} ^WebSocket$ [NC]
+      RewriteCond %{HTTP:CONNECTION} Upgrade$ [NC]
+      RewriteRule .* ws://127.0.0.1:8091%{REQUEST_URI} [P]
+    </Location>
+    
     ProxyPass / http://127.0.0.1:<%= node[:deploy][@application_name][:port] %>/
     ProxyPassReverse / http://127.0.0.1:<%= node[:deploy][@application_name][:port] %>/
+    
     <Location />
-      Order allow,deny
-      Allow from all
+      Require all granted
     </Location>
   </VirtualHost>
 <% end -%>
